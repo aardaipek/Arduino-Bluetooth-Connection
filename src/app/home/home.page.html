@@ -1,14 +1,128 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      ARDUINO
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+<!-- <ion-content padding>
+    <ion-list-header >
+      <h5 style="position: relative; left:20%;">Arduino Uno Bluetooth Connection </h5>
+    </ion-list-header>
+        <ion-item-divider color="medium"></ion-item-divider>
+    <br>
+
+    <ion-button shape="round" expand="block" color="medium" fill="outline"(click)="startScanning()">Cihazları Tara</ion-button>
+    <ion-card *ngIf="pairedDevices">
+        <ion-card-header>
+            <ion-card-title> Aygıtlarım</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+              <ion-row>
+                  <ion-col>
+                    <ion-list radio-group [(ngModel)]="pairedDeviceID" *ngIf="listToggle">
+                      <ion-item *ngFor="let i of pairedList;let j=index">
+                        <ion-label>  {{device.name}}</ion-label>
+                        <ion-radio value="{{j}}" ></ion-radio>
+                      </ion-item>
+                    </ion-list>
+                  </ion-col>
+                </ion-row>
+            
+          </ion-card-content>
+    </ion-card>
+ 
+  <ion-button shape="round"  fill="outline" (click)="disconnect()" >Bağlantıyı Kes</ion-button>
+  <ion-card *ngIf="unpairedDevices">
+      <ion-card-header>
+          <ion-card-title> Diğer Aygıtlar</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item *ngFor='let device of unpairedDevices' (click)="selectDevice(device.id)">
+                {{device.name}}
+              </ion-item>
+        </ion-card-content>
+  </ion-card>
+  
+  <h5 *ngIf="gettingDevices" >
+    Cihazlar Aranıyor
+      <ion-spinner  name="crescent" *ngIf="gettingDevices"></ion-spinner>
+   </h5>
+  
+
+  <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-input type="text" name="datasend" [(ngModel)] ="datasend" ></ion-input>
+        </ion-item><br>
+        <ion-button expand="block" fill="outline" color="tertiary" (click)="sendData()"><ion-icon style="margin-right:5px;" name="send"></ion-icon>Send</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list>
+      <ion-item >
+          {{message }}
+      </ion-item>
+    </ion-list>
+</ion-content> -->
+<ion-content no-padding>
+      <ion-button  expand="block" fill="outline" color="tertiary" class="submit-button" (click)="listPairedDevices()">
+          <ion-icon name="refresh"></ion-icon>&nbsp;Find Device</ion-button>
+        <ion-row>
+          <ion-col>
+            <ion-list radio-group [(ngModel)]="pairedDeviceID" *ngIf="listToggle">
+              <ion-item *ngFor="let i of pairedList;let j=index">
+                <ion-label>{{i.name}}</ion-label>
+                <ion-radio value="{{j}}" ></ion-radio>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+        <ion-button  expand="block" fill="outline" color="success" class="submit-button" *ngIf="listToggle" (click)="selectDevice()">
+          <ion-icon name="bluetooth"></ion-icon>&nbsp;Connect </ion-button>
+   <!--  <ion-card>
+      <ion-card-content>
+          <ion-list>
+              <ion-item>
+                <ion-label floating>Type..</ion-label>
+                <ion-input type="text" name="datasend" [(ngModel)]="dataSend"></ion-input>
+              </ion-item>
+            </ion-list><br>
+            <ion-button expand="block" fill="outline" color="tertiary" (click)="sendData()"><ion-icon style="margin-right:5px;" name="send"></ion-icon>Send</ion-button>
+
+          //  <ion-button ion-button full class="submit-button" (click)="sendData()">
+          //      <ion-icon name="send"></ion-icon>&nbsp;Send Data Via Bluetooth
+          //    </ion-button> 
+      </ion-card-content>
+    </ion-card> -->
+    <ion-card>
+      <ion-card-header>
+         <h3>Bike Wheels Count</h3> 
+      </ion-card-header>
+      <ion-card-content>
+        {{count}}
+      </ion-card-content>
+    </ion-card><br>
+
+    <ion-list >
+        <ion-button expand="block" fill="outline" color="danger" (click)="deviceDisconnected()">
+        <ion-icon style="margin-right:5px;" name="send"></ion-icon>Disconnect</ion-button>
+    </ion-list>
+    <ion-row>
+          <ion-input padding placeholder="Set Your Goal" type="number" #goal ></ion-input>
+          <ion-button color="dark" shape="round" fill="outline" (click)="setGoal(goal.value)" >
+            <ion-icon slot="start" name="checkmark"></ion-icon>
+            Ok
+          </ion-button>
+    </ion-row>    
+    <br>
+    <ion-label> Your Daily Goal : {{yourGoal}} </ion-label>
+
+        <ion-button shape="round"  expand="block" fill="outline" color="success" class="submit-button" >
+        <ion-icon name="bicycle"></ion-icon>&nbsp;Start</ion-button>    
+    <br>
+    <ion-progress-bar color="success" [value]="count" ></ion-progress-bar><br>
+   
+ 
 </ion-content>
